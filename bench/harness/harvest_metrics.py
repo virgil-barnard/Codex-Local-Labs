@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Iterable, List
 
 from .schemas import RunSummary
+from .trace import merge_trace_metrics
 
 RESULTS_ROOT = Path("results")
 RUNS_DIR = RESULTS_ROOT / "runs"
@@ -29,6 +30,13 @@ def load_summaries(run_dirs: Iterable[Path]) -> List[RunSummary]:
             continue
         try:
             payload = json.loads(metrics_path.read_text(encoding="utf-8"))
+            events_path = run_dir / "trace" / "events.jsonl"
+            if events_path.exists():
+                payload = merge_trace_metrics(payload, events_path)
+                metrics_path.write_text(
+                    json.dumps(payload, indent=2, sort_keys=True) + "\n",
+                    encoding="utf-8",
+                )
             summaries.append(RunSummary.from_json(payload, run_dir))
         except Exception as exc:  # pragma: no cover - defensive guard
             print(f"[harvest] Skipping {run_dir}: {exc}")
