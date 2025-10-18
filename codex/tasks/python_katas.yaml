@@ -1,0 +1,43 @@
+- id: "kata:normalize_whitespace"
+  intent: "Implement normalize_whitespace in bench/katas/text.py so whitespace collapses and trims."
+  workspace: "."
+  steps:
+    - run: "pytest -q bench/oracle/katas -k normalize_whitespace || true"
+    - edit: "bench/katas/text.py"
+    - run: "pytest -q bench/oracle/katas -k normalize_whitespace"
+  success:
+    tests_pass: true
+    max_edits: 3
+
+- id: "kata:rolling_average"
+  intent: "Implement rolling_average in bench/katas/numeric.py to compute simple moving averages."
+  workspace: "."
+  steps:
+    - run: "pytest -q bench/oracle/katas -k rolling_average || true"
+    - edit: "bench/katas/numeric.py"
+    - run: "pytest -q bench/oracle/katas -k rolling_average"
+  success:
+    tests_pass: true
+    max_edits: 3
+
+- id: "kata:pairwise_differences"
+  intent: "Implement pairwise_differences in bench/katas/numeric.py for successive differences."
+  workspace: "."
+  steps:
+    - run: "pytest -q bench/oracle/katas -k pairwise_differences || true"
+    - edit: "bench/katas/numeric.py"
+    - run: "pytest -q bench/oracle/katas -k pairwise_differences"
+  success:
+    tests_pass: true
+    max_edits: 3
+
+- id: "kata:merge_sorted_streams"
+  intent: "Implement merge_sorted_streams in bench/katas/streams.py to merge sorted iterables."
+  workspace: "."
+  steps:
+    - run: "pytest -q bench/oracle/katas -k merge_sorted_streams || true"
+    - edit: "bench/katas/streams.py"
+    - run: "pytest -q bench/oracle/katas -k merge_sorted_streams"
+  success:
+    tests_pass: true
+    max_edits: 3

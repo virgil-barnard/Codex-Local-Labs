@@ -1,0 +1,21 @@
+- id: "repo_ops:next_pending"
+  intent: "Fix bench/repo_ops/queue.py:next_pending to choose the oldest pending request."
+  workspace: "."
+  steps:
+    - run: "pytest -q bench/oracle/repo_ops -k next_pending || true"
+    - edit: "bench/repo_ops/queue.py"
+    - run: "pytest -q bench/oracle/repo_ops -k next_pending"
+  success:
+    tests_pass: true
+    max_edits: 3
+
+- id: "repo_ops:record_completion"
+  intent: "Fix bench/repo_ops/queue.py:record_completion so it updates the queue entry in place."
+  workspace: "."
+  steps:
+    - run: "pytest -q bench/oracle/repo_ops -k record_completion || true"
+    - edit: "bench/repo_ops/queue.py"
+    - run: "pytest -q bench/oracle/repo_ops -k record_completion"
+  success:
+    tests_pass: true
+    max_edits: 3
