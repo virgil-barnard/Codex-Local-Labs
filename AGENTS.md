@@ -86,8 +86,8 @@ Commit protocol
 Milestones (implement in order)
 
 M0 — Repo & Tooling Scaffolding
-	•	Create repo tree exactly as above. COMMIT: ______
-	•	Add pyproject.toml with ruff, pytest, coverage config. COMMIT: ______
+	•	Create repo tree exactly as above. COMMIT: 0bde9cd70809f502efb22e4f41f398124478dafe
+	•	Add pyproject.toml with ruff, pytest, coverage config. COMMIT: 16a04c9cb9a4871080370b7b42ba6f3ef9f52053
 	•	Add Makefile with targets:
 	•	make build (build runner + vllm images)
 	•	make up (compose up -d)
@@ -97,30 +97,30 @@ M0 — Repo & Tooling Scaffolding
 	•	make harvest (aggregate results → CSV)
 	•	make hfi-run SUITE=... PROFILE=... (human loop)
 	•	make hfi-publish (append to ledger, stage artifacts)
-COMMIT: ______
-	•	README.md quickstart. COMMIT: ______
+COMMIT: e678bc7b8176525592efc4d65eeae8ff66f58557
+	•	README.md quickstart. COMMIT: 1d5ba02f16b9b6150f145ee8d2633a2ad77bbc58
 
 M1 — Dockerized Providers & Runner
 	•	compose.yml services:
 	•	runner: Codex CLI + Python tooling; mounts repo; depends_on providers.
 	•	ollama: official image; persistent model cache volume.
 	•	vllm: optional GPU service (compose profile vllm), port 8000.
-COMMIT: ______
-	•	Dockerfile.runner: install Codex CLI + pytest, ruff, psutil, pandas. COMMIT: ______
-	•	Dockerfile.vllm: CUDA base, vLLM install; model/HF cache volumes. COMMIT: ______
-	•	docker/profiles/*.env (base URLs, API key placeholders). COMMIT: ______
-	•	scripts/smoke.sh curls provider /v1/models and runs codex --version. COMMIT: ______
+COMMIT: f041fe55b72d0746ef9cd520e8f88085e97a6b11
+	•	Dockerfile.runner: install Codex CLI + pytest, ruff, psutil, pandas. COMMIT: 4c1f7ac9fa59e6a4963949d2c81316f4c8c9f03c
+	•	Dockerfile.vllm: CUDA base, vLLM install; model/HF cache volumes. COMMIT: 07959534a3cf41098bd7b18ca2efe912e7828299
+	•	docker/profiles/*.env (base URLs, API key placeholders). COMMIT: 1a535d263450d17f654a06c22cd11173b4bd97b0
+	•	scripts/smoke.sh curls provider /v1/models and runs codex --version. COMMIT: dcd5423ff9616e7fabd4c1f48c4ecc1c07d51e65
 
 M2 — Codex Config & Exec Wrapper
 	•	codex/config.template.toml with:
 	•	[defaults] workspace = "."
 	•	Profiles: [profiles.ollama], [profiles.vllm] pointing to env‑driven base URLs.
-COMMIT: ______
+COMMIT: 76103235c77c5977162799aa8a8a7df62172a4c3
 	•	scripts/codex_exec_task.sh:
 	•	Args: TASK, PROFILE (default ollama).
 	•	Sets CODEX_PROFILE, CODEX_TRACE_DIR, CODEX_LOG_LEVEL=trace.
 	•	Runs codex exec --task "$TASK" --yes --verbose | tee .../run.log.
-COMMIT: ______
+COMMIT: 72d71f9ca39ef020101d53d6ed2da070c296ba8d
 
 M3 — Bench Suites & Oracles
 	•	codex/tasks/python_katas.yaml:

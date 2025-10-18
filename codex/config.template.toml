@@ -1,0 +1,17 @@
+[defaults]
+workspace = "."
+log_level = "info"
+
+[profiles.ollama]
+name = "ollama"
+base_url = "${OLLAMA_API_BASE}"
+api_key = "${OLLAMA_API_KEY}"
+temperature = 0.2
+model = "${OLLAMA_MODEL:-}" # optional override
+
+[profiles.vllm]
+name = "vllm"
+base_url = "${VLLM_API_BASE}"
+api_key = "${VLLM_API_KEY}"
+temperature = 0.2
+model = "${VLLM_MODEL:-}"
