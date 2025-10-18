@@ -315,8 +315,8 @@ Initial task queue (execute now)
 	5.	[x] M4: Harness & metrics aggregator; CSV output. COMMIT: 11f56e55f17498e2632153199de4cab1e5cc4bd9
 	6.	[x] HFL: Add bench/hfi and scripts; seed FEEDBACK_QUEUE.yaml with 1–2 requests. COMMIT: 11f56e55f17498e2632153199de4cab1e5cc4bd9
 	7.	M5 (optional): CI workflow.
-	8.	Align Codex config template with upstream model_providers schema; ensure profiles map to providers and defaults. (TODO)
-	9.	Pass --profile through exec wrappers and smoke tests so automation selects the intended backend. (TODO)
-	10.	Capture Codex --json traces for richer metrics (tokens, edits, command outcomes) and surface them in metrics.json/CSV. (TODO)
+	8.	[x] Align Codex config template with upstream model_providers schema; ensure profiles map to providers and defaults. COMMIT: 0816921499cd25a7634eb22d31eb04915d84fe8a
+	9.	[x] Pass --profile through exec wrappers and smoke tests so automation selects the intended backend. COMMIT: 0816921499cd25a7634eb22d31eb04915d84fe8a
+	10.	[x] Capture Codex --json traces for richer metrics (tokens, edits, command outcomes) and surface them in metrics.json/CSV. COMMIT: 0816921499cd25a7634eb22d31eb04915d84fe8a
 
 Begin with M0. Keep commits small. Append commit hashes into milestone boxes as you go.

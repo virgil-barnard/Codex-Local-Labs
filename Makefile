@@ -35,7 +35,7 @@ down:
 	$(COMPOSE) -f $(COMPOSE_FILE) down -v
 
 smoke:
-	./scripts/smoke.sh
+        SMOKE_PROFILE=$(PROFILE) PROFILE=$(PROFILE) ./scripts/smoke.sh
 
 bench:
 	@test -n "$(SUITE)" || (echo "SUITE is required" >&2 && exit 1)

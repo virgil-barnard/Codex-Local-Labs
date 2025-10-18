@@ -13,6 +13,7 @@ ts=$(date -u +%Y%m%dT%H%M%SZ)
 task_name=$(basename "${TASK}")
 run_dir="results/runs/${ts}_${PROFILE}"
 trace_dir="${run_dir}/trace"
+json_trace="${trace_dir}/events.jsonl"
 run_log="${run_dir}/run.log"
 
 mkdir -p "${trace_dir}"
@@ -31,8 +32,9 @@ export CODEX_LOG_LEVEL=${CODEX_LOG_LEVEL:-trace}
 echo "[codex] Executing ${task_name} with profile ${PROFILE}" >&2
 set -o pipefail
 if command -v codex >/dev/null 2>&1; then
-  codex exec --profile "${PROFILE}" --task "${TASK}" --yes --verbose |
-    tee "${run_log}"
+  codex exec --profile "${PROFILE}" --task "${TASK}" --yes --verbose --json \
+    | tee "${json_trace}" \
+    | tee "${run_log}"
 else
   echo "[codex] Codex CLI is not installed in the current environment" >&2
   exit 127
