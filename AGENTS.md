@@ -127,14 +127,17 @@ M3 — Bench Suites & Oracles
 	•	5–10 tiny functions with docstrings; tests in bench/oracle/katas/test_*.py.
 	•	Success = pytest green after Codex edits.
 COMMIT: fcdb08fcc8724eef744989465117318227c913b1
+COMMIT: fcfb4bc3bf1f5d46fb540e393f27303d02029f8a
 	•	codex/tasks/bugfix_mini.yaml:
 	•	Minimal seeded bug(s) + failing tests in bench/oracle/bugfix/.
 	•	Success = tests pass; record diff size & time‑to‑green.
 COMMIT: fcdb08fcc8724eef744989465117318227c913b1
+COMMIT: fcfb4bc3bf1f5d46fb540e393f27303d02029f8a
 	•	codex/tasks/repo_ops.yaml:
 	•	Tasks such as adding pre-commit, Ruff hooks, minimal CI workflow.
 	•	Success = lint/test pass; files correctly added.
 COMMIT: fcdb08fcc8724eef744989465117318227c913b1
+COMMIT: fcfb4bc3bf1f5d46fb540e393f27303d02029f8a
 
 M4 — Harness, Metrics, Dashboards
 	•	bench/harness/run_suite.sh:
@@ -308,7 +311,7 @@ Initial task queue (execute now)
 	1.	M0: Scaffold repo, tooling, Makefile, README.
 	2.	M1: Compose with runner, ollama, optional vllm; smoke script.
 	3.	M2: Codex config template + exec wrapper.
-	4.	[x] M3: Implement python_katas, bugfix_mini, repo_ops suites + oracles.
+	4.	[x] M3: Implement python_katas, bugfix_mini, repo_ops suites + oracles. COMMIT: fcfb4bc3bf1f5d46fb540e393f27303d02029f8a
 	5.	M4: Harness & metrics aggregator; CSV output.
 	6.	HFL: Add bench/hfi and scripts; seed FEEDBACK_QUEUE.yaml with 1–2 requests.
 	7.	M5 (optional): CI workflow.

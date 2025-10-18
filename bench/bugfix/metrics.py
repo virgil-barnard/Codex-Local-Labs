@@ -15,7 +15,10 @@ def top_k(scores: Dict[str, float], limit: int) -> list[Tuple[str, float]]:
     sorted data.
     """
 
-    sorted_items = sorted(scores.items(), key=lambda item: item[1])
+    if limit <= 0:
+        return []
+
+    sorted_items = sorted(scores.items(), key=lambda item: item[1], reverse=True)
     return sorted_items[:limit]
 
 
@@ -29,5 +32,6 @@ def merge_counts(base: Dict[str, int], patches: Iterable[Dict[str, int]]) -> Dic
 
     merged = dict(base)
     for patch in patches:
-        merged.update(patch)
+        for key, value in patch.items():
+            merged[key] = merged.get(key, 0) + value
     return merged

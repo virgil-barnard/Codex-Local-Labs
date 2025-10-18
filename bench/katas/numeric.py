@@ -14,7 +14,22 @@ def rolling_average(values: Sequence[float], window: int) -> List[float]:
     no larger than the input sequence.
     """
 
-    raise NotImplementedError("rolling_average has not been implemented yet")
+    length = len(values)
+    if window <= 0 or window > length:
+        raise ValueError("window must be between 1 and the length of values")
+
+    if window == 0:  # defensive; handled above but keeps type-checkers happy
+        return []
+
+    averages: List[float] = []
+    window_sum = sum(values[:window])
+    averages.append(window_sum / window)
+
+    for idx in range(window, length):
+        window_sum += values[idx] - values[idx - window]
+        averages.append(window_sum / window)
+
+    return averages
 
 
 def pairwise_differences(values: Iterable[float]) -> List[float]:
@@ -24,4 +39,15 @@ def pairwise_differences(values: Iterable[float]) -> List[float]:
     values are provided. For shorter iterables an empty list is expected.
     """
 
-    raise NotImplementedError("pairwise_differences has not been implemented yet")
+    iterator = iter(values)
+    try:
+        previous = next(iterator)
+    except StopIteration:
+        return []
+
+    differences: List[float] = []
+    for current in iterator:
+        differences.append(float(current) - float(previous))
+        previous = current
+
+    return differences
