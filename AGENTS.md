@@ -318,5 +318,8 @@ Initial task queue (execute now)
 	8.	[x] Align Codex config template with upstream model_providers schema; ensure profiles map to providers and defaults. COMMIT: 0816921499cd25a7634eb22d31eb04915d84fe8a
 	9.	[x] Pass --profile through exec wrappers and smoke tests so automation selects the intended backend. COMMIT: 0816921499cd25a7634eb22d31eb04915d84fe8a
 	10.	[x] Capture Codex --json traces for richer metrics (tokens, edits, command outcomes) and surface them in metrics.json/CSV. COMMIT: 0816921499cd25a7634eb22d31eb04915d84fe8a
+	11.	[x] Ship CLI helpers to append and reconcile HFI queue requests. COMMIT: c034dbd4f6ea16d5406ddb5c886a116a5c93d55e
+	12.	Implement results ingestor to update results/analysis/latest_summary.md and adjust future queue priorities.
+	13.	Flesh out scripts/bootstrap.sh for first-run DX (copy env templates, validate dependencies).
 
 Begin with M0. Keep commits small. Append commit hashes into milestone boxes as you go.

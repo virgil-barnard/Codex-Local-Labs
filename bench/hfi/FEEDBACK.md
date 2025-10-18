@@ -37,3 +37,9 @@ Each human-feedback run saves the following files under `results/runs/...`:
 - Missing GPU metrics simply result in `gpu: []` within `sysinfo.json`.
 - To re-run a failed request, leave the queue entry as `status: "pending"` and
   rerun `make hfi-run` at your convenience.
+
+## Queue Management Helpers
+
+- Append new requests with `python -m bench.repo_ops.queue_cli add --suite ... --profile ...`.
+- List the queue contents with `python -m bench.repo_ops.queue_cli list`.
+- Reconcile published runs back into the queue using `python -m bench.repo_ops.queue_cli reconcile`.
