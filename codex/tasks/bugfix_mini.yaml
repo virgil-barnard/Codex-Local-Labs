@@ -1,0 +1,21 @@
+- id: "bugfix:top_k_order"
+  intent: "Fix bench/bugfix/metrics.py:top_k so it returns highest scores first and handles edge cases."
+  workspace: "."
+  steps:
+    - run: "pytest -q bench/oracle/bugfix -k top_k || true"
+    - edit: "bench/bugfix/metrics.py"
+    - run: "pytest -q bench/oracle/bugfix -k top_k"
+  success:
+    tests_pass: true
+    max_edits: 3
+
+- id: "bugfix:merge_counts"
+  intent: "Fix bench/bugfix/metrics.py:merge_counts so counts accumulate instead of overwriting."
+  workspace: "."
+  steps:
+    - run: "pytest -q bench/oracle/bugfix -k merge_counts || true"
+    - edit: "bench/bugfix/metrics.py"
+    - run: "pytest -q bench/oracle/bugfix -k merge_counts"
+  success:
+    tests_pass: true
+    max_edits: 3
