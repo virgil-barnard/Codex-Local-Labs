@@ -11,5 +11,8 @@ def normalize_whitespace(text: str) -> str:
     Multiple whitespace clusters inside the string collapse into a single
     ASCII space (" ").
     """
-
-    raise NotImplementedError("normalize_whitespace has not been implemented yet")
+    # ``str.split`` without arguments treats every Unicode whitespace character
+    # as a separator and ignores consecutive runs. Joining the resulting
+    # segments with a single ASCII space therefore collapses all whitespace
+    # clusters while also trimming leading and trailing characters.
+    return " ".join(text.split())
