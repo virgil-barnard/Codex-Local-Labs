@@ -312,8 +312,8 @@ Initial task queue (execute now)
 	2.	M1: Compose with runner, ollama, optional vllm; smoke script.
 	3.	M2: Codex config template + exec wrapper.
 	4.	[x] M3: Implement python_katas, bugfix_mini, repo_ops suites + oracles. COMMIT: fcfb4bc3bf1f5d46fb540e393f27303d02029f8a
-	5.	M4: Harness & metrics aggregator; CSV output.
-	6.	HFL: Add bench/hfi and scripts; seed FEEDBACK_QUEUE.yaml with 1–2 requests.
+	5.	[x] M4: Harness & metrics aggregator; CSV output. COMMIT: 11f56e55f17498e2632153199de4cab1e5cc4bd9
+	6.	[x] HFL: Add bench/hfi and scripts; seed FEEDBACK_QUEUE.yaml with 1–2 requests. COMMIT: 11f56e55f17498e2632153199de4cab1e5cc4bd9
 	7.	M5 (optional): CI workflow.
 
 Begin with M0. Keep commits small. Append commit hashes into milestone boxes as you go.
