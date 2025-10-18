@@ -4,6 +4,7 @@ set -euo pipefail
 COMPOSE=${COMPOSE:-docker compose}
 COMPOSE_FILE=${COMPOSE_FILE:-docker/compose.yml}
 ENABLE_VLLM=${ENABLE_VLLM:-0}
+SMOKE_PROFILE=${SMOKE_PROFILE:-${PROFILE:-ollama}}
 
 PROFILE_ARGS=()
 if [[ "${ENABLE_VLLM}" == "1" ]]; then
@@ -45,9 +46,8 @@ fi
 echo "[smoke] Checking Codex CLI availability" >&2
 if run_compose exec runner command -v codex >/dev/null 2>&1; then
   run_compose exec runner codex --version
-  SMOKE_PROFILE=${SMOKE_PROFILE:-ollama}
   echo "[smoke] Verifying codex --profile ${SMOKE_PROFILE} --version" >&2
-  run_compose exec runner codex --profile "${SMOKE_PROFILE}" --version
+  run_compose exec runner env CODEX_PROFILE="${SMOKE_PROFILE}" codex --profile "${SMOKE_PROFILE}" --version
 else
   echo "[smoke] Codex CLI not installed in runner container" >&2
 fi

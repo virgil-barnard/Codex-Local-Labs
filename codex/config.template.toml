@@ -3,23 +3,52 @@ workspace = "."
 log_level = "info"
 approval_mode = "auto"
 sandbox = true
+profile = "${CODEX_PROFILE:-ollama}"
 
 [model_providers.ollama]
-name = "Ollama"
+label = "Ollama"
+description = "Local Ollama server exposing an OpenAI-compatible API"
+transport = "openai_compatible"
 base_url = "${OLLAMA_API_BASE:-http://localhost:11434/v1}"
 api_key = "${OLLAMA_API_KEY:-}"
 
+[model_providers.ollama.defaults]
+model = "${OLLAMA_MODEL:-mistral}"
+temperature = 0.2
+top_p = 0.9
+max_output_tokens = 2048
+
 [model_providers.vllm]
-name = "vLLM"
+label = "vLLM"
+description = "Optional GPU-accelerated vLLM server"
+transport = "openai_compatible"
 base_url = "${VLLM_API_BASE:-http://localhost:8000/v1}"
 api_key = "${VLLM_API_KEY:-}"
 
-[profiles.ollama]
-model_provider = "ollama"
-model = "${OLLAMA_MODEL:-mistral}"
-temperature = 0.2
-
-[profiles.vllm]
-model_provider = "vllm"
+[model_providers.vllm.defaults]
 model = "${VLLM_MODEL:-mistral}"
 temperature = 0.2
+top_p = 0.9
+max_output_tokens = 4096
+
+[profiles.ollama]
+provider = "ollama"
+model_provider = "ollama"
+model = "${OLLAMA_MODEL:-mistral}"
+description = "Deterministic defaults tuned for CPU-backed Ollama"
+
+[profiles.ollama.defaults]
+temperature = 0.2
+top_p = 0.9
+max_output_tokens = 2048
+
+[profiles.vllm]
+provider = "vllm"
+model_provider = "vllm"
+model = "${VLLM_MODEL:-mistral}"
+description = "Deterministic defaults tuned for GPU-backed vLLM"
+
+[profiles.vllm.defaults]
+temperature = 0.2
+top_p = 0.9
+max_output_tokens = 4096
