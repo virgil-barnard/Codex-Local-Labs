@@ -1,17 +1,25 @@
 [defaults]
 workspace = "."
 log_level = "info"
+approval_mode = "auto"
+sandbox = true
+
+[model_providers.ollama]
+name = "Ollama"
+base_url = "${OLLAMA_API_BASE:-http://localhost:11434/v1}"
+api_key = "${OLLAMA_API_KEY:-}"
+
+[model_providers.vllm]
+name = "vLLM"
+base_url = "${VLLM_API_BASE:-http://localhost:8000/v1}"
+api_key = "${VLLM_API_KEY:-}"
 
 [profiles.ollama]
-name = "ollama"
-base_url = "${OLLAMA_API_BASE}"
-api_key = "${OLLAMA_API_KEY}"
+model_provider = "ollama"
+model = "${OLLAMA_MODEL:-mistral}"
 temperature = 0.2
-model = "${OLLAMA_MODEL:-}" # optional override
 
 [profiles.vllm]
-name = "vllm"
-base_url = "${VLLM_API_BASE}"
-api_key = "${VLLM_API_KEY}"
+model_provider = "vllm"
+model = "${VLLM_MODEL:-mistral}"
 temperature = 0.2
-model = "${VLLM_MODEL:-}"

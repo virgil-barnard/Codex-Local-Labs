@@ -26,6 +26,7 @@ run_id="${ts}_${run_kind}_${PROFILE}_${SUITE}"
 run_dir="results/runs/${run_id}"
 trace_dir="${run_dir}/trace"
 run_log="${run_dir}/run.log"
+json_trace="${trace_dir}/events.jsonl"
 metrics_file="${run_dir}/metrics.json"
 
 mkdir -p "${trace_dir}"
@@ -48,7 +49,9 @@ if command -v codex >/dev/null 2>&1; then
   CODEX_PROFILE="${PROFILE}" \
     CODEX_TRACE_DIR="${trace_dir}" \
     CODEX_LOG_LEVEL=${CODEX_LOG_LEVEL:-trace} \
-    codex exec --task "${TASK_FILE}" --yes --verbose | tee "${run_log}"
+    codex exec --profile "${PROFILE}" --task "${TASK_FILE}" --yes --verbose --json \
+    | tee "${json_trace}" \
+    | tee "${run_log}"
   exit_code=${PIPESTATUS[0]}
   set -e
 else
@@ -107,6 +110,22 @@ metrics = {
 metrics_path = Path("${metrics_file}")
 metrics_path.parent.mkdir(parents=True, exist_ok=True)
 metrics_path.write_text(json.dumps(metrics, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+PY
+
+python - <<PY
+import json
+from pathlib import Path
+
+from bench.harness.trace import merge_trace_metrics
+
+metrics_path = Path("${metrics_file}")
+events_path = Path("${json_trace}")
+
+if metrics_path.exists() and events_path.exists():
+    payload = json.loads(metrics_path.read_text(encoding="utf-8"))
+    merged = merge_trace_metrics(payload, events_path, wall_time=${wall_s})
+    metrics_path.write_text(json.dumps(merged, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 PY
 
 HARVEST_HINT="Run metrics captured in ${metrics_file}"

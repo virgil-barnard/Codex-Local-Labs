@@ -62,6 +62,9 @@ class RunSummary:
     gpu_mem_total: Optional[str] = None
     run_kind: str = "bench"
     exit_code: Optional[int] = None
+    commands_total: Optional[int] = None
+    commands_succeeded: Optional[int] = None
+    commands_failed: Optional[int] = None
     extra: Dict[str, Any] = field(default_factory=dict)
 
     CSV_FIELDS: Iterable[str] = (
@@ -79,6 +82,9 @@ class RunSummary:
         "edits",
         "files_changed",
         "loc_delta",
+        "commands_total",
+        "commands_succeeded",
+        "commands_failed",
         "tests_pass",
         "gpu_name",
         "gpu_mem_total",
@@ -119,6 +125,9 @@ class RunSummary:
                 "backend_model",
                 "wall_s",
                 "tests_pass",
+                "commands_total",
+                "commands_succeeded",
+                "commands_failed",
             }
         }
 
@@ -142,6 +151,9 @@ class RunSummary:
             gpu_mem_total=(payload.get("gpu_mem_total") or None),
             run_kind=str(payload.get("run_kind") or "bench"),
             exit_code=_coerce_optional_int(payload.get("exit_code")),
+            commands_total=_coerce_optional_int(payload.get("commands_total")),
+            commands_succeeded=_coerce_optional_int(payload.get("commands_succeeded")),
+            commands_failed=_coerce_optional_int(payload.get("commands_failed")),
             extra=extra,
         )
 
@@ -171,6 +183,9 @@ class RunSummary:
             "edits": _fmt(self.edits),
             "files_changed": _fmt(self.files_changed),
             "loc_delta": _fmt(self.loc_delta),
+            "commands_total": _fmt(self.commands_total),
+            "commands_succeeded": _fmt(self.commands_succeeded),
+            "commands_failed": _fmt(self.commands_failed),
             "tests_pass": _fmt(self.tests_pass),
             "gpu_name": _fmt(self.gpu_name),
             "gpu_mem_total": _fmt(self.gpu_mem_total),

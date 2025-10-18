@@ -31,7 +31,8 @@ export CODEX_LOG_LEVEL=${CODEX_LOG_LEVEL:-trace}
 echo "[codex] Executing ${task_name} with profile ${PROFILE}" >&2
 set -o pipefail
 if command -v codex >/dev/null 2>&1; then
-  codex exec --task "${TASK}" --yes --verbose | tee "${run_log}"
+  codex exec --profile "${PROFILE}" --task "${TASK}" --yes --verbose |
+    tee "${run_log}"
 else
   echo "[codex] Codex CLI is not installed in the current environment" >&2
   exit 127
