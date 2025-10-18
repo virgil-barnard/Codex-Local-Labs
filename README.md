@@ -53,6 +53,15 @@ and a human-feedback loop so maintainers can compare model performance on repeat
    make hfi-publish
    ```
 
+   To append new manual-run requests or reconcile the queue with published
+   results, use the queue management CLI:
+
+   ```bash
+   python -m bench.repo_ops.queue_cli add --suite python_katas --profile ollama --notes "Try new baseline"
+   python -m bench.repo_ops.queue_cli list
+   python -m bench.repo_ops.queue_cli reconcile
+   ```
+
 9. When finished, tear down the stack and remove volumes:
 
    ```bash

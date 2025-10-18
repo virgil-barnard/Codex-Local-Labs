@@ -3,6 +3,7 @@
     "id": "request-ollama-katas-baseline",
     "suite": "python_katas",
     "profile": "ollama",
+    "created_at": "2024-04-01T00:00:00Z",
     "status": "pending",
     "notes": "Capture a baseline human run on the default Ollama profile."
   },
@@ -10,6 +11,7 @@
     "id": "request-ollama-bugfix-followup",
     "suite": "bugfix_mini",
     "profile": "ollama",
+    "created_at": "2024-04-01T00:05:00Z",
     "status": "pending",
     "notes": "Validate bugfix_mini tasks after recent harness updates."
   }
